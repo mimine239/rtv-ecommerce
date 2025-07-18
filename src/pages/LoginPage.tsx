@@ -33,12 +33,21 @@ const LoginPage = () => {
     } catch (err) {
       console.error('Erreur de connexion:', err);
       
-      // Détecter si l'utilisateur n'existe pas
+      // Détecter le type d'erreur spécifique
       const errorMessage = err instanceof Error ? err.message : String(err);
+      
       if (errorMessage.includes('auth/user-not-found')) {
         setUserNotFound(true);
         setError('Aucun compte n\'existe avec cet email.');
         toast.error('Utilisateur non trouvé');
+      } else if (errorMessage.includes('auth/invalid-credential')) {
+        setUserNotFound(false);
+        setError('Email ou mot de passe incorrect.');
+        toast.error('Identifiants invalides');
+      } else if (errorMessage.includes('auth/wrong-password')) {
+        setUserNotFound(false);
+        setError('Mot de passe incorrect.');
+        toast.error('Mot de passe incorrect');
       } else {
         setUserNotFound(false);
         setError('Échec de la connexion. Vérifiez vos identifiants.');

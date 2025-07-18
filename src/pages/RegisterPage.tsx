@@ -52,6 +52,12 @@ const RegisterPage = () => {
       return;
     }
     
+    // Validation de la force du mot de passe
+    if (formData.password.length < 6) {
+      setError('Le mot de passe doit contenir au moins 6 caractères');
+      return;
+    }
+    
     try {
       setError('');
       setLoading(true);
@@ -70,8 +76,23 @@ const RegisterPage = () => {
       navigate('/login');
     } catch (err) {
       console.error('Erreur lors de l\'inscription:', err);
-      setError('Échec de l\'inscription. Veuillez réessayer.');
-      toast.error('Échec de l\'inscription');
+      
+      // Détecter le type d'erreur spécifique
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      
+      if (errorMessage.includes('auth/weak-password')) {
+        setError('Le mot de passe doit contenir au moins 6 caractères.');
+        toast.error('Mot de passe trop faible');
+      } else if (errorMessage.includes('auth/email-already-in-use')) {
+        setError('Un compte existe déjà avec cette adresse email.');
+        toast.error('Email déjà utilisé');
+      } else if (errorMessage.includes('auth/invalid-email')) {
+        setError('L\'adresse email n\'est pas valide.');
+        toast.error('Email invalide');
+      } else {
+        setError('Échec de l\'inscription. Veuillez réessayer.');
+        toast.error('Échec de l\'inscription');
+      }
     } finally {
       setLoading(false);
     }
