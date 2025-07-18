@@ -1,0 +1,48 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* stylelint-enable */
+/* stylelint-enable */
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Couleurs personnalisées */
+  --color-primary: #3B82F6;
+  --color-secondary: #10B981;
+  --color-accent: #8B5CF6;
+  --color-dark: #1F2937;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* stylelint-disable */
+@layer components {
+  .btn-primary {
+    /* stylelint-disable */
+    @apply bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/80 transition-all;
+    /* stylelint-enable */
+  }
+  
+  .btn-secondary {
+    /* stylelint-disable */
+    @apply bg-secondary text-white px-4 py-2 rounded-md hover:bg-secondary/80 transition-all;
+    /* stylelint-enable */
+  }
+  
+  .container-custom {
+    /* stylelint-disable */
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    /* stylelint-enable */
+  }
+}
+/* stylelint-enable */
