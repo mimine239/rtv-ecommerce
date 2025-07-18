@@ -213,6 +213,9 @@ const ProductPage = () => {
                   );
                   
                   if (!existingConversation) {
+                    // Générer un ID temporaire pour la nouvelle conversation
+                    const tempConversationId = `conv_${Date.now()}_${currentUser.uid}_${product.vendorId}`;
+                    
                     // Créer un nouveau message pour initialiser la conversation
                     await messageService.sendMessage({
                       senderId: currentUser.uid,
@@ -220,6 +223,7 @@ const ProductPage = () => {
                       receiverId: product.vendorId,
                       receiverName: product.vendorName || 'Vendeur',
                       content: `Bonjour, je suis intéressé par votre produit "${product.name}".`,
+                      conversationId: tempConversationId,
                       productId: product.id,
                       productName: product.name
                     });

@@ -9,6 +9,7 @@ export interface Message {
   content: string;
   timestamp: Date | string;
   read: boolean;
+  conversationId: string; // ID de la conversation associée
   productId?: string; // ID du produit concerné, si applicable
   productName?: string; // Nom du produit concerné, si applicable
 }

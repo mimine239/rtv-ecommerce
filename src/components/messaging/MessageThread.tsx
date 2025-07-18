@@ -82,6 +82,7 @@ const MessageThread: React.FC<MessageThreadProps> = ({
         receiverId: otherParticipantId,
         receiverName: otherParticipantName,
         content: newMessage.trim(),
+        conversationId: conversation.id,
         productId: conversation.productId,
         productName: conversation.productName
       });
@@ -95,7 +96,8 @@ const MessageThread: React.FC<MessageThreadProps> = ({
         receiverName: otherParticipantName,
         content: newMessage.trim(),
         timestamp: new Date(),
-        read: false
+        read: false,
+        conversationId: conversation.id
       };
       
       setMessages(prevMessages => [...prevMessages, tempMessage]);
@@ -128,7 +130,7 @@ const MessageThread: React.FC<MessageThreadProps> = ({
           </div>
         ) : messages.length === 0 ? (
           <div className="text-center text-gray-500 py-8">
-            <p>Aucun message. Commencez la conversation !</p>
+            <p>Envoyez votre premier message pour démarrer la conversation.</p>
           </div>
         ) : (
           messages.map(message => (

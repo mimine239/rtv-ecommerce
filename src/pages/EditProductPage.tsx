@@ -74,6 +74,9 @@ const EditProductPage = () => {
       console.log('Données de mise à jour:', updatedData);
       await productService.updateProduct(productId, updatedData);
       toast.success('Produit mis à jour avec succès');
+      
+      // Rediriger vers la page des produits du vendeur après la mise à jour
+      navigate('/vendor/products');
       return Promise.resolve();
     } catch (error) {
       console.error('Erreur lors de la modification du produit:', error);
